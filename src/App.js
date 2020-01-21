@@ -55,7 +55,7 @@ class App extends Component {
   }
 
   callApi = async () => {
-    const response = await fetch('/api/investments');
+    const response = await fetch('https://igorila-server.herokuapp.com/api/investments');
     const body = await response.json();
     if (response.status !== 200) throw Error(body.message);
     return body;
@@ -63,7 +63,7 @@ class App extends Component {
 
   handleSubmit = async e => {
     e.preventDefault();
-    const response = await fetch('/api/investments', {
+    const response = await fetch('https://igorila-server.herokuapp.com/api/investments', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -92,7 +92,7 @@ class App extends Component {
   handleRemove = async e => {
     e.preventDefault();
     const data = new FormData(e.target);
-    const response = await fetch('/api/investments', {
+    const response = await fetch('https://igorila-server.herokuapp.com/api/investments', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
