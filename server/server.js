@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const indexRoute = require('./routes/routes.js');
+const indexRoute = require('../routes/routes.js');
 
 // Instantiate express
 const app = express();
