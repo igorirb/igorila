@@ -42,6 +42,7 @@ class App extends Component {
         this.setState({ list: res });
         let rendaFixa = 0;
         let rendaVariavel = 0;
+        // eslint-disable-next-line
         Object.keys(this.state.list).map(key => {
           this.state.list[key].Type==='RENDA_VARIAVEL'?rendaVariavel+=this.state.list[key].Value:rendaFixa+=this.state.list[key].Value
         });
@@ -78,6 +79,7 @@ class App extends Component {
     this.setState({ list: body });
     let rendaFixa = 0;
     let rendaVariavel = 0;
+    // eslint-disable-next-line
     Object.keys(this.state.list).map(key => {
       this.state.list[key].Type==='RENDA_VARIAVEL'?rendaVariavel+=this.state.list[key].Value:rendaFixa+=this.state.list[key].Value
     });
@@ -103,6 +105,7 @@ class App extends Component {
     this.setState({ list: body });
     let rendaFixa = 0;
     let rendaVariavel = 0;
+    // eslint-disable-next-line
     Object.keys(this.state.list).map(key => {
       this.state.list[key].Type==='RENDA_VARIAVEL'?rendaVariavel+=this.state.list[key].Value:rendaFixa+=this.state.list[key].Value
     });
