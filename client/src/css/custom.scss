@@ -1,0 +1,37 @@
+// Override default variables before the import
+$body-bg: #fff;
+// Import Bootstrap and its default variables
+@import '~bootstrap/scss/bootstrap.scss';
+
+.removeBtn {
+  height: 25px;
+}
+
+footer {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+.jumbotron {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    margin-bottom: 0;
+    background-color: #fff;
+  }
+
+.jumbotron .lead {
+  margin-bottom: 0;
+}
+
+.col-auto {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.submitInvestmentBtn {
+  border-color: #ced4da;
+}
+
+.form-control {
+  color: #6c757d;
+}
