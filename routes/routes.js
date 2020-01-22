@@ -9,6 +9,14 @@ var pool = mysql.createPool({
     database: 'crjlx97gj9ds3jsd',
     port: 3306
 });
+// var pool = mysql.createPool({
+//     connectionLimit: 5,
+//     host: 'j1r4n2ztuwm0bhh5.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+//     user: 'b8qfdjqwds9aszvz',
+//     password: 'gn9uxfea72gkvb6l',
+//     database: 'qh4haqg4q522kpjj',
+//     port: 3306
+// });
 
 function executeQuery(sqlQry, res){
   pool.query(sqlQry, function(err, results, fields){

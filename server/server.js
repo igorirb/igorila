@@ -1,18 +1,29 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const indexRoute = require('../routes/routes.js');
-
-// Instantiate express
-const app = express();
+const path = require('path');
 
 // Set our port
 const port = process.env.PORT || 5000;
 
-// Configure app tu use bodyParser
+// Instantiate express
+const app = express();
+
+// Configuring express
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, '/../build')));
 
-// Register our routes in api
+// Production mode
+if(process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '/../build')));
+} else {
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname+'/../public/index.html'));
+  });
+}
+
+// Registering routes
 app.use('/api', indexRoute);
 
 // Start our server
