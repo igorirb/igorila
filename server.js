@@ -1,6 +1,7 @@
+// Loading dependencies
 const express = require('express');
 const bodyParser = require('body-parser');
-const indexRoute = require('../routes/routes.js');
+const indexRoute = require('./routes/routes.js');
 const path = require('path');
 
 // Set our port
@@ -12,19 +13,20 @@ const app = express();
 // Configuring express
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, '/../build')));
-
-// Production mode
-if(process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '/../build')));
-} else {
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname+'/../public/index.html'));
-  });
-}
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 // Registering routes
 app.use('/api', indexRoute);
+
+// Production mode
+if(process.env.NODE_ENV === 'production') {
+  console.log('Production Mode');
+  app.use(express.static(path.join(__dirname, 'client/build')));
+}
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname+'/client/public/index.html'));
+});
 
 // Start our server
 app.listen(port, () => console.log(`Listening on port ${port}`));

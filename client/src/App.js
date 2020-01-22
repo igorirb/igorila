@@ -1,3 +1,4 @@
+// Loading dependencies
 import React, { Component } from 'react';
 import Moment from 'react-moment';
 import CurrencyFormat from 'react-currency-format';
@@ -7,6 +8,8 @@ import removeBtn from './images/remove.png';
 class App extends Component {
   constructor(props) {
     super(props);
+
+    // Create state variable to hold information retrieved from the database and to be used on chart creation
     this.state = {
       list: '',
       id: '',
@@ -34,12 +37,21 @@ class App extends Component {
       }
     };
     this.handleRemove = this.handleRemove.bind(this);
+    this.connectToServer = this.connectToServer.bind(this);
+  }
+
+  connectToServer() {
+    fetch('/');
   }
 
   componentDidMount() {
+    this.connectToServer();
+
+    // Starts the page by pulling data from the database and populating the pie chart
     this.callApi()
       .then(res => {
         this.setState({ list: res });
+        // Populating pie chart
         let rendaFixa = 0;
         let rendaVariavel = 0;
         // eslint-disable-next-line
@@ -55,12 +67,16 @@ class App extends Component {
   }
 
   callApi = async () => {
+    // Send GET request to the database and receive the list of investments
     const response = await fetch('/api/investments');
     const body = await response.json();
     if (response.status !== 200) throw Error(body.message);
     return body;
   };
 
+  // Handle form submition
+  // Sends POST request to the database, inserts a new entry and returns the updated list of investments
+  // Finally, it will update the pie chart as well
   handleSubmit = async e => {
     e.preventDefault();
     const response = await fetch('/api/investments', {
@@ -89,6 +105,9 @@ class App extends Component {
     this.setState({ series: series });
   };
 
+  // Handle remove button
+  // Sends DELETE request to the database with the ID of the table row to be deleted
+  // Returns the updated list of investments and populates the pie chart
   handleRemove = async e => {
     e.preventDefault();
     const data = new FormData(e.target);
@@ -115,6 +134,7 @@ class App extends Component {
     this.setState({ series: series });
   };
 
+  // Rendering the view
   render() {
     return (
       <div className="App" class="container">

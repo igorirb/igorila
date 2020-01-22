@@ -1,59 +1,30 @@
 {
   "name": "igorila",
-  "author": "igor-barroso",
-  "description": "web app built for gorila invest",
-  "license": "MIT",
   "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "client": "react-scripts start",
-    "server": "cd server && nodemon server.js",
-    "start": "concurrently --kill-others-on-fail \"npm run client\" \"npm run server\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm run build"
-  },
+  "description": "'web app created for gorila invest'",
+  "main": "server.js",
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.4.0",
-    "@testing-library/user-event": "^7.2.1",
-    "apexcharts": "^3.15.2",
-    "axios": "^0.19.1",
     "body-parser": "^1.19.0",
-    "bootstrap": "^4.4.1",
+    "mocha": "^7.0.0",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "concurrently": "^3.5.0",
     "express": "^4.16.2",
     "express-pino-logger": "^4.0.0",
     "heroku": "^7.36.3",
-    "jquery": "^3.4.1",
-    "mocha": "^7.0.0",
-    "moment": "^2.24.0",
     "mysql": "^2.17.1",
     "node-sass": "^4.13.1",
-    "nodemon": "^2.0.2",
-    "popper.js": "^1.16.0",
-    "react": "^16.12.0",
-    "react-apexcharts": "^1.3.6",
-    "react-currency-format": "^1.0.0",
-    "react-dom": "^16.12.0",
-    "react-moment": "^0.9.7",
-    "react-scripts": "3.3.0",
-    "socket.io": "^2.3.0"
+    "nodemon": "^2.0.2"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "scripts": {
+    "client-install": "npm install --prefix client",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "test": "'mocha'",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "proxy": "http://localhost:5000/"
+  "author": "'igor barroso'",
+  "license": "ISC"
 }

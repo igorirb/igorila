@@ -1,5 +1,8 @@
+// Loading dependencies
 var express = require('express');
 var router = express.Router();
+
+// Creating instance of database using pooling system
 var mysql = require('mysql');
 var pool = mysql.createPool({
     connectionLimit: 5,
@@ -9,15 +12,8 @@ var pool = mysql.createPool({
     database: 'crjlx97gj9ds3jsd',
     port: 3306
 });
-// var pool = mysql.createPool({
-//     connectionLimit: 5,
-//     host: 'j1r4n2ztuwm0bhh5.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
-//     user: 'b8qfdjqwds9aszvz',
-//     password: 'gn9uxfea72gkvb6l',
-//     database: 'qh4haqg4q522kpjj',
-//     port: 3306
-// });
 
+// Execute query and send results
 function executeQuery(sqlQry, res){
   pool.query(sqlQry, function(err, results, fields){
     if (err) throw error;
@@ -26,20 +22,28 @@ function executeQuery(sqlQry, res){
   });
 }
 
+// Handles GET requests sent to '/'
 router.get('/', (req, res) => {
   res.send('Working');
 });
 
+// Handles GET requests sent to '/investments'
+// Calls 'executeQuery' with SELECT query
 router.get('/investments', (req, res) => {
   executeQuery('SELECT * FROM Investments', res);
 });
 
+// Handles GET requests sent to '/investments/id'
+// Calls 'executeQuery' with SELECT query using ID
 router.get('/investments/:id?', (req, res) => {
   let filter = '';
   if(req.params.id) filter = ' WHERE ID=' + parseInt(req.params.id);
   executeQuery('SELECT * FROM Investments' + filter, res);
 });
 
+// Handles POST requests sent to '/investments'
+// Executes INSERT INTO query to add new row on the table
+// Calls 'executeQuery' with SELECT to retrieve updated list of investments
 router.post('/investments', (req, res) => {
   let filter = '';
   if(req.body.type && req.body.value && req.body.date) {
@@ -51,6 +55,9 @@ router.post('/investments', (req, res) => {
   }
 });
 
+// Handles DELETE requests sent to '/investments'
+// Executes DELETE query to remove a row from the table using specified ID
+// Calls 'executeQuery' with SELECT to retrieve updated list of investments
 router.delete('/investments', (req, res) => {
   let filter = '';
   if(req.body.id) {
