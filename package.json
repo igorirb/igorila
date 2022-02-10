@@ -13,7 +13,7 @@
     "express-pino-logger": "^4.0.0",
     "heroku": "^7.36.3",
     "mysql": "^2.17.1",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "nodemon": "^2.0.2"
   },
   "scripts": {
